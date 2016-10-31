@@ -845,7 +845,7 @@ public class DemoHelper {
 	/**
 	 * update contact list
 	 * 
-	 * @param contactList
+	 * @param aContactList
 	 */
 	public void setContactList(Map<String, EaseUser> aContactList) {
 		if(aContactList == null){
@@ -917,7 +917,7 @@ public class DemoHelper {
 	 /**
      * update user list to cache and database
      *
-     * @param contactList
+     * @param contactInfoList
      */
     public void updateContactList(List<EaseUser> contactInfoList) {
          for (EaseUser u : contactInfoList) {
