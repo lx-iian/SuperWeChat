@@ -39,7 +39,7 @@ import com.hyphenate.chat.EMCallManager.EMCameraDataProcessor;
 import com.hyphenate.chat.EMCallManager.EMVideoCallHelper;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
-import com.zhou.superwechat.DemoHelper;
+import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.R;
 import com.hyphenate.media.EMLocalSurfaceView;
 import com.hyphenate.media.EMOppositeSurfaceView;
@@ -114,7 +114,7 @@ public class VideoCallActivity extends CallActivity implements OnClickListener {
         }
         setContentView(R.layout.em_activity_video_call);
         
-        DemoHelper.getInstance().isVideoCalling = true;
+        SuperWeChatHelper.getInstance().isVideoCalling = true;
         callType = 1;
         
         getWindow().addFlags(
@@ -508,7 +508,7 @@ public class VideoCallActivity extends CallActivity implements OnClickListener {
 
     @Override
     protected void onDestroy() {
-        DemoHelper.getInstance().isVideoCalling = false;
+        SuperWeChatHelper.getInstance().isVideoCalling = false;
         stopMonitor();
         if(isRecording){
             callHelper.stopVideoRecord();

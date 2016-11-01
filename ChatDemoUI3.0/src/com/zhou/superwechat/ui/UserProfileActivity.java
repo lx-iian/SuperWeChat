@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import com.bumptech.glide.Glide;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
-import com.zhou.superwechat.DemoHelper;
+import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.R;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;
@@ -116,12 +116,12 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 	}
 	
 	public void asyncFetchUserInfo(String username){
-		DemoHelper.getInstance().getUserProfileManager().asyncGetUserInfo(username, new EMValueCallBack<EaseUser>() {
+		SuperWeChatHelper.getInstance().getUserProfileManager().asyncGetUserInfo(username, new EMValueCallBack<EaseUser>() {
 			
 			@Override
 			public void onSuccess(EaseUser user) {
 				if (user != null) {
-				    DemoHelper.getInstance().saveContact(user);
+				    SuperWeChatHelper.getInstance().saveContact(user);
 				    if(isFinishing()){
 				        return;
 				    }
@@ -176,7 +176,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 
 			@Override
 			public void run() {
-				boolean updatenick = DemoHelper.getInstance().getUserProfileManager().updateCurrentUserNickName(nickName);
+				boolean updatenick = SuperWeChatHelper.getInstance().getUserProfileManager().updateCurrentUserNickName(nickName);
 				if (UserProfileActivity.this.isFinishing()) {
 					return;
 				}
@@ -258,7 +258,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 
 			@Override
 			public void run() {
-				final String avatarUrl = DemoHelper.getInstance().getUserProfileManager().uploadUserAvatar(data);
+				final String avatarUrl = SuperWeChatHelper.getInstance().getUserProfileManager().uploadUserAvatar(data);
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
