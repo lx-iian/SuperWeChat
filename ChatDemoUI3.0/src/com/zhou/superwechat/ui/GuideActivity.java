@@ -1,15 +1,16 @@
 package com.zhou.superwechat.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.zhou.superwechat.R;
+import com.zhou.superwechat.utils.MFGT;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GuideActivity extends BaseActivity {
+    private GuideActivity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +23,11 @@ public class GuideActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
-                startActivity(new Intent(GuideActivity.this, LoginActivity.class));
+                MFGT.gotoLogin(mContext);
                 finish();
                 break;
             case R.id.btnRegister:
-                startActivity(new Intent(GuideActivity.this, RegisterActivity.class));
+                MFGT.gotoRegister(mContext);
                 finish();
                 break;
         }
