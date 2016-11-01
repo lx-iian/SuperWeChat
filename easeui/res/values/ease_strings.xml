@@ -107,7 +107,7 @@
     <string name="user_name">User name</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
-    <string name="confirmpassword">Confirm password</string>
+    <string name="confirm_password">Confirm password</string>
     <string name="downwaiting">Downloading the file, please try again later</string>
     <string name="mute">Mute</string>
     <string name="Hands_free">Hands free</string>

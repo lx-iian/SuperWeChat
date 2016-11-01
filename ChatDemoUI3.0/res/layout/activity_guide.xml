@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash"
-    tools:context="com.hyphenate.chatuidemo.ui.GuideActivity">
+    tools:context="com.hyphenate.chatuidemo.com.zhou.chatuidemo.ui.GuideActivity">
 
     <ImageView
         android:id="@+id/iv_splash_logo"
@@ -34,9 +34,9 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="22dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_centerHorizontal="true">
 
         <Button
             android:id="@+id/btnLogin"

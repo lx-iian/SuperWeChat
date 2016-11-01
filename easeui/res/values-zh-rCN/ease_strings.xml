@@ -110,7 +110,9 @@
     <string name="To_join_the_chat">加入群聊</string>
     <string name="login">登录</string>
     <string name="user_name">账　号</string>
+    <string name="nick_name">昵　称</string>
     <string name="password">密　码</string>
+    <string name="confirm_password">确认密码</string>
     <string name="register">注册</string>
     <string name="confirmpassword">确认密码</string>
     <string name="downwaiting">正在下载文件请稍后</string>
@@ -290,7 +292,7 @@
     <string name="illegal_user_name">用户名不合法</string>
     <string name="robot_chat">环信小助手</string>
     <string name="title_user_profile">个人资料</string>
-    <string name="nickname">昵称</string>
+    <string name="nickname">昵　称</string>
     <string name="dl_title_upload_photo">上传头像</string>
     <string name="dl_msg_local_upload">本地上传</string>
     <string name="dl_msg_take_photo">拍照上传</string>
