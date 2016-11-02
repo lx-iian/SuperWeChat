@@ -30,17 +30,20 @@ import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.zhou.superwechat.R;
 import com.zhou.superwechat.SuperWeChatApplication;
 import com.zhou.superwechat.SuperWeChatHelper;
+import com.zhou.superwechat.bean.Result;
 import com.zhou.superwechat.data.NetDao;
 import com.zhou.superwechat.data.OkHttpUtils;
 import com.zhou.superwechat.db.SuperWeChatDBManager;
+import com.zhou.superwechat.db.UserDao;
 import com.zhou.superwechat.utils.CommonUtils;
 import com.zhou.superwechat.utils.L;
-import com.zhou.superwechat.utils.MD5;
 import com.zhou.superwechat.utils.MFGT;
+import com.zhou.superwechat.utils.ResultUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -124,7 +127,7 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         currentUsername = etUsername.getText().toString().trim();
-        currentPassword = MD5.getMessageDigest(etPassword.getText().toString().trim());
+        currentPassword = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(currentUsername)) {
             CommonUtils.showLongToast(R.string.User_name_cannot_be_empty);
@@ -198,7 +201,25 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(String s) {
                 L.e(TAG, "s= " + s);
-                loginSuccess();
+                if (s != null && s != "") {
+                    Result result = ResultUtils.getResultFromJson(s, User.class);
+                    if (result != null && result.isRetMsg()) {
+                        L.e(TAG, "result =" + result);
+                        User user = (User) result.getRetData();
+                        if (user != null) {
+                            L.e(TAG, "user =" + user);
+                            UserDao dao = new UserDao(mContext);
+                            dao.saveUser(user);
+                            SuperWeChatHelper.getInstance().setCurrentUser(user);
+                            loginSuccess();
+                        }
+                    } else {
+                        pd.dismiss();
+                        L.e(TAG, "login fail = " + result);
+                    }
+                } else {
+                    pd.dismiss();
+                }
             }
 
             @Override
@@ -252,5 +273,11 @@ public class LoginActivity extends BaseActivity {
                 login();
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pd.dismiss();
     }
 }
