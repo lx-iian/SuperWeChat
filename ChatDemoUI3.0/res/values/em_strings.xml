@@ -118,7 +118,6 @@
     <string name="login">Log In</string>
     <string name="user_name">Account</string>
     <string name="et_user_name">e.g.：dada</string>
-    <string name="login_txt_username">SuperWeChat ID</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="sign_up">Sign Up</string>

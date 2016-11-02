@@ -126,7 +126,7 @@
                 android:layout_marginRight="18dip"
                 android:layout_weight="1"
                 android:textAllCaps="false"
-                android:background="@drawable/em_button_login_bg"
+                android:background="@color/green"
                 android:gravity="center"
                 android:paddingBottom="7dp"
                 android:paddingTop="7dp"
@@ -137,8 +137,8 @@
         </LinearLayout>
 
         <TextView
-            android:text="登陆遇到问题？"
-            android:textSize="18sp"
+            android:text="@string/login_txt_qustion"
+            android:textSize="15sp"
             android:textColor="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
