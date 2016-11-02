@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Main-->
-    <string name="app_name">微信</string>
+    <string name="app_name">超级微信</string>
     <string name="contacts">通讯录</string>
     <string name="me">我</string>
     <string name="discover">发现</string>
@@ -103,4 +103,5 @@
     <string name="setting_txt_tongyong">通用</string>
     <string name="setting_txt_about">关于微信</string>
     <string name="setting_btn_exit">退出登录</string>
+    <string name="nick_name_connot_be_empty">昵称为空</string>
 </resources>
