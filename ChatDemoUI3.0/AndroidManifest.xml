@@ -4,7 +4,6 @@
     package="com.zhou.superwechat"
     android:versionCode="36"
     android:versionName="3.1.4">
-
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="22"
@@ -31,7 +30,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
-    <!-- GCM required, remember replace "com." to your own package -->
+    <!-- GCM required, remember replace "com.zhou.superwechat" to your own package -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
@@ -46,7 +45,7 @@
 
     <uses-permission android:name="com.zhou.superwechat.permission.MIPUSH_RECEIVE" />
 
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".SuperWeChatApplication"

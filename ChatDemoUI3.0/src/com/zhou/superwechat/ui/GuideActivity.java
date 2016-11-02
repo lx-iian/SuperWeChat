@@ -19,13 +19,13 @@ public class GuideActivity extends BaseActivity {
         ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.btnLogin, R.id.btnRegister})
+    @OnClick({R.id.btn_gotoLogin, R.id.btn_gotoRegister})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnLogin:
+            case R.id.btn_gotoLogin:
                 MFGT.gotoLogin(this);
                 break;
-            case R.id.btnRegister:
+            case R.id.btn_gotoRegister:
                 MFGT.gotoRegister(this);
                 break;
         }

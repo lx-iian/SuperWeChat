@@ -25,12 +25,14 @@ import android.widget.Toast;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
+import com.zhou.superwechat.I;
 import com.zhou.superwechat.R;
 import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.bean.Result;
 import com.zhou.superwechat.data.NetDao;
 import com.zhou.superwechat.data.OkHttpUtils;
 import com.zhou.superwechat.utils.CommonUtils;
+import com.zhou.superwechat.utils.MD5;
 import com.zhou.superwechat.utils.MFGT;
 
 import butterknife.ButterKnife;
@@ -52,19 +54,20 @@ public class RegisterActivity extends BaseActivity {
     @InjectView(R.id.et_password)
     EditText etPassword;
     @InjectView(R.id.et_confirm_password)
-    EditText confirmPwdEditText;
+    EditText etConfirmPwd;
 
     private ProgressDialog pd = null;
-    private String username;
-    private String nick;
-    private String pwd;
-    RegisterActivity mContext;
+    private  String username;
+    private  String nick;
+    private  String pwd;
+    private  RegisterActivity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.em_activity_register);
         ButterKnife.inject(this);
+        mContext = this;
         initView();
     }
 
@@ -78,7 +81,7 @@ public class RegisterActivity extends BaseActivity {
         username = etUsername.getText().toString().trim();
         nick = etNick.getText().toString().trim();
         pwd = etPassword.getText().toString().trim();
-        String confirm_pwd = confirmPwdEditText.getText().toString().trim();
+        String confirm_pwd = etConfirmPwd.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
             CommonUtils.showShortToast(R.string.User_name_cannot_be_empty);
             etUsername.requestFocus();
@@ -97,7 +100,7 @@ public class RegisterActivity extends BaseActivity {
             return;
         } else if (TextUtils.isEmpty(confirm_pwd)) {
             CommonUtils.showShortToast(getResources().getString(R.string.Confirm_password_cannot_be_empty));
-            confirmPwdEditText.requestFocus();
+            etConfirmPwd.requestFocus();
             return;
         } else if (!pwd.equals(confirm_pwd)) {
             CommonUtils.showShortToast(getResources().getString(R.string.Two_input_password));
@@ -116,10 +119,19 @@ public class RegisterActivity extends BaseActivity {
         NetDao.register(mContext, username, nick, pwd, new OkHttpUtils.OnCompleteListener<Result>() {
             @Override
             public void onSuccess(Result result) {
-                if (result != null && result.isRetMsg()) {
-                    registerEMServer();
+                if (result == null) {
+                    pd.dismiss();
                 } else {
-                    unregisterAppServer();
+                    if (result.isRetMsg()) {
+                        registerEMServer();
+                    } else {
+                        if (result.getRetCode() == I.MSG_REGISTER_USERNAME_EXISTS) {
+                            CommonUtils.showShortToast(result.getRetCode());
+                            pd.dismiss();
+                        } else {
+                            unregisterAppServer();
+                        }
+                    }
                 }
             }
 
@@ -139,7 +151,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onError(String error) {
-
+                pd.dismiss();
             }
         });
     }
@@ -149,7 +161,7 @@ public class RegisterActivity extends BaseActivity {
             public void run() {
                 try {
                     // call method in SDK
-                    EMClient.getInstance().createAccount(username, pwd);
+                    EMClient.getInstance().createAccount(username, MD5.getMessageDigest(pwd));
                     runOnUiThread(new Runnable() {
                         public void run() {
                             if (!RegisterActivity.this.isFinishing())
@@ -157,8 +169,7 @@ public class RegisterActivity extends BaseActivity {
                             // save current user
                             SuperWeChatHelper.getInstance().setCurrentUserName(username);
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
-                           finish();
-                            // MFGT.finish(mContext);
+                            MFGT.finish(mContext);
                         }
                     });
                 } catch (final HyphenateException e) {

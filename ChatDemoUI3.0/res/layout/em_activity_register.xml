@@ -49,14 +49,13 @@
                 android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/iv_username"
-                android:layout_toRightOf="@+id/tv_re_UserName"
                 android:background="@null"
                 android:hint="@string/et_user_name"
                 android:paddingLeft="10dip"
                 android:singleLine="true"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/tv_re_UserName" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -209,7 +208,8 @@
                 android:background="@drawable/shape_radius_green"
                 android:paddingBottom="7dp"
                 android:paddingTop="7dp"
-                android:text="@string/register"
+                android:textAllCaps="false"
+                android:text="@string/sign_up"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>

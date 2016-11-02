@@ -12,19 +12,29 @@ import com.zhou.superwechat.SuperWeChatApplication;
  */
 public class CommonUtils {
     public static void showLongToast(String msg) {
-        Toast.makeText(SuperWeChatApplication.getInstance(), msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(SuperWeChatApplication.applicationContext, msg, Toast.LENGTH_LONG).show();
     }
 
     public static void showShortToast(String msg) {
-        Toast.makeText(SuperWeChatApplication.getInstance(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(SuperWeChatApplication.applicationContext, msg, Toast.LENGTH_SHORT).show();
     }
 
     public static void showLongToast(int rId) {
-        showLongToast(SuperWeChatApplication.getInstance().getString(rId));
+        showLongToast(SuperWeChatApplication.applicationContext.getString(rId));
     }
 
     public static void showShortToast(int rId) {
-        showShortToast(SuperWeChatApplication.getInstance().getString(rId));
+        showShortToast(SuperWeChatApplication.applicationContext.getString(rId));
+    }
+
+    public static void showMsgShortToast(int msgId) {
+        if (msgId > 0) {
+            showShortToast(SuperWeChatApplication.getInstance().getResources()
+                    .getIdentifier(I.MSG_PREFIX_MSG + msgId, "string",
+                            SuperWeChatApplication.getInstance().getPackageCodePath()));
+        } else {
+            showShortToast(R.string.msg_1);
+        }
     }
 
   /*    public static void showLongResultMsg(int msg) {
