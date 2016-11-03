@@ -31,6 +31,7 @@ public class CommonUtils {
         if (msgId > 0) {
             showShortToast(SuperWeChatApplication.getInstance().getResources()
                     .getIdentifier(I.MSG_PREFIX_MSG + msgId, "string",
+                           // SuperWeChatApplication.getInstance().getPackageCodePath()));
                             SuperWeChatApplication.getInstance().getPackageCodePath()));
         } else {
             showShortToast(R.string.msg_1);

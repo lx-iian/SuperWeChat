@@ -126,7 +126,7 @@ public class RegisterActivity extends BaseActivity {
                         registerEMServer();
                     } else {
                         if (result.getRetCode() == I.MSG_REGISTER_USERNAME_EXISTS) {
-                            CommonUtils.showShortToast(result.getRetCode());
+                            CommonUtils.showMsgShortToast(result.getRetCode());
                             pd.dismiss();
                         } else {
                             unregisterAppServer();

@@ -55,6 +55,7 @@ import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
+import com.zhou.superwechat.utils.L;
 
 import java.util.List;
 
@@ -64,8 +65,8 @@ public class MainActivity extends BaseActivity {
 	protected static final String TAG = "MainActivity";
 	// textview for unread message count
 	private TextView unreadLabel;
-	// textview for unread event message
 	private TextView unreadAddressLable;
+	// textview for unread event message
 
 	private Button[] mTabs;
 	private ContactListFragment contactListFragment;
@@ -88,7 +89,7 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		L.e(TAG,".onCreate");
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 		    String packageName = getPackageName();
 		    PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);

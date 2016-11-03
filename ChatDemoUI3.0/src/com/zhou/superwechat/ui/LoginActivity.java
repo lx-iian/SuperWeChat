@@ -172,6 +172,7 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess() {
                 Log.d(TAG, "login: onSuccess");
                 loginAppServer();
+                loginSuccess();
             }
 
             @Override
@@ -260,6 +261,9 @@ public class LoginActivity extends BaseActivity {
         super.onResume();
         if (autoLogin) {
             return;
+        }
+        if (SuperWeChatHelper.getInstance().getCurrentUsernName() != null) {
+            etUsername.setText(SuperWeChatHelper.getInstance().getCurrentUsernName());
         }
     }
 
