@@ -278,6 +278,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        pd.dismiss();
+        if (pd != null) {
+            pd.dismiss();
+        }
     }
 }
