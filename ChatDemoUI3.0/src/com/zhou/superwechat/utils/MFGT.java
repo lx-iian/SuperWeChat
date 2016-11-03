@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.zhou.superwechat.R;
+import com.zhou.superwechat.ui.GuideActivity;
 import com.zhou.superwechat.ui.LoginActivity;
 import com.zhou.superwechat.ui.RegisterActivity;
 
@@ -28,6 +29,10 @@ public class MFGT {
     public static void startActivityForResult(Activity context, Intent intent, int requestCode) {
         context.startActivityForResult(intent, requestCode);
         context.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
+    public static void gotoGuide(Activity context) {
+        startActivity(context, GuideActivity.class);
     }
 
     public static void gotoLogin(Activity context) {

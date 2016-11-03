@@ -5,7 +5,8 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_bg">
+    android:background="@color/common_bg"
+    tools:context="com.zhou.superwechat.ui.MainActivity">
 
     <include
         android:id="@+id/layout_main_title"
@@ -15,16 +16,17 @@
         android:id="@+id/layout_main_view_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layout_main_title">
+        android:layout_below="@+id/layout_main_title"
+        android:paddingBottom="48dp">
 
     </com.zhou.superwechat.widget.MFViewPager>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
@@ -32,40 +34,37 @@
             android:background="#D6DCDC" />
 
         <com.zhou.superwechat.widget.DMTabHost
+            android:id="@+id/layout_main_tabHost"
             android:layout_width="match_parent"
-            android:layout_height="46dp">
+            android:layout_height="47dp">
 
             <com.zhou.superwechat.widget.DMTabButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:drawableTop="@drawable/tab_weixin"
-                app:tabtext="@string/app_name">
-            </com.zhou.superwechat.widget.DMTabButton>
+                app:tabtext="@string/app_name"></com.zhou.superwechat.widget.DMTabButton>
 
             <com.zhou.superwechat.widget.DMTabButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:drawableTop="@drawable/tab_contact_list"
-                app:tabtext="@string/contacts">
-            </com.zhou.superwechat.widget.DMTabButton>
+                app:tabtext="@string/contacts"></com.zhou.superwechat.widget.DMTabButton>
 
             <com.zhou.superwechat.widget.DMTabButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:drawableTop="@drawable/tab_find"
-                app:tabtext="@string/discover">
-            </com.zhou.superwechat.widget.DMTabButton>
+                app:tabtext="@string/discover"></com.zhou.superwechat.widget.DMTabButton>
 
             <com.zhou.superwechat.widget.DMTabButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:drawableTop="@drawable/tab_profile"
-                app:tabtext="@string/me">
-            </com.zhou.superwechat.widget.DMTabButton>
+                app:tabtext="@string/me"></com.zhou.superwechat.widget.DMTabButton>
         </com.zhou.superwechat.widget.DMTabHost>
     </LinearLayout>
 

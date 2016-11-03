@@ -172,7 +172,6 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess() {
                 Log.d(TAG, "login: onSuccess");
                 loginAppServer();
-                loginSuccess();
             }
 
             @Override

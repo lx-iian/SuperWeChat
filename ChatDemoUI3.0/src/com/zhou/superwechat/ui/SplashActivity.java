@@ -12,13 +12,14 @@ import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.R;
 import com.zhou.superwechat.db.UserDao;
 import com.zhou.superwechat.utils.L;
+import com.zhou.superwechat.utils.MFGT;
 
 /**
  * 开屏页
  */
 public class SplashActivity extends BaseActivity {
     private static final String TAG = SplashActivity.class.getSimpleName();
-
+    private boolean autoLogin;
     private static final int sleepTime = 2000;
     private SplashActivity mContext;
 
@@ -28,13 +29,13 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(arg0);
         mContext = this;
 
-        RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.splash_root);
+     /*   RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.splash_root);
         TextView versionText = (TextView) findViewById(R.id.tv_version);
 
         versionText.setText(getVersion());
         AlphaAnimation animation = new AlphaAnimation(0.3f, 1.0f);
         animation.setDuration(1500);
-        rootLayout.startAnimation(animation);
+        rootLayout.startAnimation(animation);*/
         L.e(TAG);
     }
 
@@ -62,6 +63,14 @@ public class SplashActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                     }
+                    if (user == null) {
+                        if (SuperWeChatHelper.getInstance().isLoggedIn()) {
+                            autoLogin = false;
+                            MFGT.gotoGuide(mContext);
+                            finish();
+                            return;
+                        }
+                    }
                     //enter main screen
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
@@ -70,7 +79,7 @@ public class SplashActivity extends BaseActivity {
                         Thread.sleep(sleepTime);
                     } catch (InterruptedException e) {
                     }
-                    startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+                    MFGT.gotoGuide(mContext);
                     finish();
                 }
             }
