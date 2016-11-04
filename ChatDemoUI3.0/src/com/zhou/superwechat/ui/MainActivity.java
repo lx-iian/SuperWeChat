@@ -212,12 +212,14 @@ public class MainActivity extends BaseActivity implements
         layoutMainViewPage.setAdapter(adapter);
         layoutMainViewPage.setOffscreenPageLimit(4);
         adapter.clear();
-        adapter.addFragment(new ContactListFragment(), getString(R.string.app_name));
+        adapter.addFragment(new ConversationListFragment(), getString(R.string.app_name));
         adapter.addFragment(new ContactListFragment(), getString(R.string.contacts));
-        adapter.addFragment(new ContactListFragment(), getString(R.string.discover));
-        adapter.addFragment(new ContactListFragment(), getString(R.string.me));
+        adapter.addFragment(new DiscoverFragment(), getString(R.string.discover));
+        adapter.addFragment(new ProfileFragment(), getString(R.string.me));
         adapter.notifyDataSetChanged();
         layoutMainTabHost.setChecked(0);
+        layoutMainTabHost.setOnCheckedChangeListener(this);
+        layoutMainViewPage.setOnPageChangeListener(this);
     }
 
     EMMessageListener messageListener = new EMMessageListener() {

@@ -32,6 +32,7 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.zhou.superwechat.I;
 import com.zhou.superwechat.R;
 import com.zhou.superwechat.SuperWeChatApplication;
 import com.zhou.superwechat.SuperWeChatHelper;
@@ -123,7 +124,7 @@ public class LoginActivity extends BaseActivity {
      */
     public void login() {
         if (!EaseCommonUtils.isNetWorkConnected(this)) {
-            Toast.makeText(this, R.string.network_isnot_available, Toast.LENGTH_SHORT).show();
+            CommonUtils.showLongToast(R.string.network_isnot_available);
             return;
         }
         currentUsername = etUsername.getText().toString().trim();
@@ -214,6 +215,13 @@ public class LoginActivity extends BaseActivity {
                             loginSuccess();
                         }
                     } else {
+                        if (result.getRetCode() == I.MSG_LOGIN_UNKNOW_USER) {
+                            CommonUtils.showLongToast(R.string.msg_105);
+                        } else if (result.getRetCode() == I.MSG_LOGIN_ERROR_PASSWORD) {
+                            CommonUtils.showLongToast(R.string.msg_106);
+                        } else {
+                            CommonUtils.showLongToast(R.string.login_tip_loginerror);
+                        }
                         pd.dismiss();
                         L.e(TAG, "login fail = " + result);
                     }
@@ -221,7 +229,6 @@ public class LoginActivity extends BaseActivity {
                     pd.dismiss();
                 }
             }
-
             @Override
             public void onError(String error) {
                 pd.dismiss();

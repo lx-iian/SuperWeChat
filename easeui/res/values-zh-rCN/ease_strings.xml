@@ -113,6 +113,7 @@
     <string name="nick_name">昵　称</string>
     <string name="password">密　码</string>
     <string name="login_txt_username">超级微信账号</string>
+    <string name="wechat_id">超级微信号：</string>
     <string name="confirm_password">确认密码</string>
     <string name="register">注册</string>
     <string name="sign_up">注册</string>

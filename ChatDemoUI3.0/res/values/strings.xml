@@ -110,8 +110,8 @@
     <string name="msg_102">注册失败</string>
     <string name="msg_103">解除注册失败</string>
     <string name="msg_104">查找用户失败</string>
-    <string name="msg_105">账户不存在</string>
-    <string name="msg_106">账户密码错误</string>
+    <string name="msg_105">用户不存在</string>
+    <string name="msg_106">账号或密码错误</string>
     <string name="msg_107">登陆成功</string>
     <string name="msg_108">昵称未修改</string>
     <string name="msg_109">昵称修改失败</string>
@@ -143,4 +143,7 @@
     <string name="msg_415">查找公开群失败</string>
     <string name="msg_501">获取附近的人失败</string>
     <string name="msg_1">未知错误</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

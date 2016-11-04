@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.zhou.superwechat.R;
 
-public class DicoverFragment extends Fragment {
+public class DiscoverFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
