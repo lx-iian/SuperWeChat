@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easemob.redpacketui.utils.RedPacketUtil;
-import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.zhou.superwechat.Constant;
 import com.zhou.superwechat.R;
+import com.zhou.superwechat.utils.MFGT;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -69,6 +69,7 @@ public class ProfileFragment extends Fragment {
                 break;
             //end of red packet code
             case R.id.tv_profile_settings:
+                MFGT.gotoSetting(getActivity());
                 break;
         }
     }
