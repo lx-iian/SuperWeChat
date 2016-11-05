@@ -209,9 +209,10 @@ public class MainActivity extends BaseActivity implements
         txtLeft.setVisibility(View.VISIBLE);
         imRight.setVisibility(View.VISIBLE);
         adapter = new MainTabAdpter(getSupportFragmentManager());
+        adapter.clear();
         layoutMainViewPage.setAdapter(adapter);
         layoutMainViewPage.setOffscreenPageLimit(4);
-        adapter.clear();
+
         adapter.addFragment(new ConversationListFragment(), getString(R.string.app_name));
         adapter.addFragment(new ContactListFragment(), getString(R.string.contacts));
         adapter.addFragment(new DiscoverFragment(), getString(R.string.discover));

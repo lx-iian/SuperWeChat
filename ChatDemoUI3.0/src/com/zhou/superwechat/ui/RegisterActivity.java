@@ -32,6 +32,7 @@ import com.zhou.superwechat.bean.Result;
 import com.zhou.superwechat.data.NetDao;
 import com.zhou.superwechat.data.OkHttpUtils;
 import com.zhou.superwechat.utils.CommonUtils;
+import com.zhou.superwechat.utils.L;
 import com.zhou.superwechat.utils.MD5;
 import com.zhou.superwechat.utils.MFGT;
 
@@ -43,6 +44,8 @@ import butterknife.OnClick;
  * register screen
  */
 public class RegisterActivity extends BaseActivity {
+    private static final String TAG = RegisterActivity.class.getSimpleName();
+
     @InjectView(R.id.iv_back)
     ImageView imBack;
     @InjectView(R.id.txt_title)
@@ -57,10 +60,10 @@ public class RegisterActivity extends BaseActivity {
     EditText etConfirmPwd;
 
     private ProgressDialog pd = null;
-    private  String username;
-    private  String nick;
-    private  String pwd;
-    private  RegisterActivity mContext;
+    private String username;
+    private String nick;
+    private String pwd;
+    private RegisterActivity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +89,11 @@ public class RegisterActivity extends BaseActivity {
             CommonUtils.showShortToast(R.string.User_name_cannot_be_empty);
             etUsername.requestFocus();
             return;
-        } /*else if (!username.matches("[a-zA-Z]\\w{5,15}")) {
+        } else if (!username.matches("[a-zA-Z]\\w{5,15}")) {
             CommonUtils.showShortToast(R.string.illegal_user_name);
             etUsername.requestFocus();
             return;
-        }*/ else if (TextUtils.isEmpty(nick)) {
+        } else if (TextUtils.isEmpty(nick)) {
             CommonUtils.showShortToast(R.string.nick_name_connot_be_empty);
             etNick.requestFocus();
             return;
@@ -168,6 +171,7 @@ public class RegisterActivity extends BaseActivity {
                                 pd.dismiss();
                             // save current user
                             SuperWeChatHelper.getInstance().setCurrentUserName(username);
+                            L.e(TAG, "pwd = " + pwd);
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), Toast.LENGTH_SHORT).show();
                             MFGT.finish(mContext);
                         }

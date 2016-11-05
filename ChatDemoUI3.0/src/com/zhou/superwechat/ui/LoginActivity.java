@@ -129,7 +129,7 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         currentUsername = etUsername.getText().toString().trim();
-        currentPassword = MD5.getMessageDigest(etPassword.getText().toString().trim());
+        currentPassword = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(currentUsername)) {
             CommonUtils.showLongToast(R.string.User_name_cannot_be_empty);
@@ -168,7 +168,7 @@ public class LoginActivity extends BaseActivity {
         final long start = System.currentTimeMillis();
         // call login method
         Log.d(TAG, "EMClient.getInstance().login");
-        EMClient.getInstance().login(currentUsername, currentPassword, new EMCallBack() {
+        EMClient.getInstance().login(currentUsername, MD5.getMessageDigest(currentPassword), new EMCallBack() {
 
             @Override
             public void onSuccess() {
