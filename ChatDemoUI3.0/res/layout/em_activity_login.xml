@@ -45,15 +45,15 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/tvUserName"
             android:background="@null"
             android:hint="@string/login_txt_username"
             android:paddingLeft="20dp"
             android:singleLine="true"
             android:textColor="#000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/tvUserName" />
 
     </RelativeLayout>
 

@@ -43,6 +43,7 @@ import com.zhou.superwechat.db.SuperWeChatDBManager;
 import com.zhou.superwechat.db.UserDao;
 import com.zhou.superwechat.utils.CommonUtils;
 import com.zhou.superwechat.utils.L;
+import com.zhou.superwechat.utils.MD5;
 import com.zhou.superwechat.utils.MFGT;
 import com.zhou.superwechat.utils.ResultUtils;
 
@@ -128,7 +129,7 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         currentUsername = etUsername.getText().toString().trim();
-        currentPassword = etPassword.getText().toString().trim();
+        currentPassword = MD5.getMessageDigest(etPassword.getText().toString().trim());
 
         if (TextUtils.isEmpty(currentUsername)) {
             CommonUtils.showLongToast(R.string.User_name_cannot_be_empty);

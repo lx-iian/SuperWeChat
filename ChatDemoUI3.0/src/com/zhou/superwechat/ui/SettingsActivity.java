@@ -16,12 +16,9 @@ package com.zhou.superwechat.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,20 +26,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.easemob.redpacketui.utils.RedPacketUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
-import com.zhou.superwechat.Constant;
-import com.zhou.superwechat.SuperWeChatHelper;
-import com.zhou.superwechat.SuperWeChatModel;
-import com.zhou.superwechat.R;
 import com.hyphenate.easeui.widget.EaseSwitchButton;
 import com.hyphenate.util.EMLog;
+import com.zhou.superwechat.R;
+import com.zhou.superwechat.SuperWeChatHelper;
+import com.zhou.superwechat.SuperWeChatModel;
 import com.zhou.superwechat.utils.ExitAppUtils;
 import com.zhou.superwechat.utils.MFGT;
-
-import static com.zhou.superwechat.R.id.container;
 
 /**
  * settings screen
@@ -386,7 +379,9 @@ public class SettingsActivity extends BaseActivity implements OnClickListener {
                         // show login screen
                         ExitAppUtils.getInstance().exti();
                         finish();
-                        startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
+                        // 关闭所有栈，重新加载
+                        startActivity(new Intent(SettingsActivity.this, LoginActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
                 });
             }

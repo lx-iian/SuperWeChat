@@ -116,13 +116,13 @@ public class EaseUserUtils {
         }
     }
 
-    public static void setCurentAppUserAvatar(FragmentActivity activity, ImageView imageView) {
+    public static void setCurrentAppUserAvatar(FragmentActivity activity, ImageView imageView) {
         String username = EMClient.getInstance().getCurrentUser();
         setAppUserAvatar(activity, username, imageView);
     }
 
 
-    public static void setCurentAppUserNick(TextView textView) {
+    public static void setCurrentAppUserNick(TextView textView) {
         String username = EMClient.getInstance().getCurrentUser();
         setAppUserNick(username, textView);
     }
@@ -133,7 +133,12 @@ public class EaseUserUtils {
         setAppUserName(String.valueOf(R.string.wechat_id), username, textView);
     }
 
+    public static void setCurrentAppUserName(TextView textView) {
+        String username = EMClient.getInstance().getCurrentUser();
+        setAppUserName("", username, textView);
+    }
+
     private static void setAppUserName(String suffix, String username, TextView textView) {
-        textView.setText(suffix+ username);
+        textView.setText(suffix + username);
     }
 }
