@@ -4,6 +4,7 @@
     package="com.zhou.superwechat"
     android:versionCode="36"
     android:versionName="3.1.4">
+
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="22"
@@ -44,7 +45,6 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.zhou.superwechat.permission.MIPUSH_RECEIVE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -267,7 +267,6 @@
             android:name=".ui.SetServersActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" />
-
         <activity
             android:name=".ui.SettingsActivity"
             android:screenOrientation="portrait"
@@ -476,6 +475,7 @@
             android:value="3ecea51f560650b1ed8a4b99808f52e8" />
 
         <activity android:name=".ui.GuideActivity" />
+        <activity android:name=".ui.FriendProfileActivity"></activity>
     </application>
 
 </manifest>

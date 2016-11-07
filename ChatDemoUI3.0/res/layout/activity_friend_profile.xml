@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_frient_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/text_unselected"
+    android:orientation="vertical"
+    tools:context="com.zhou.superwechat.ui.FriendProfileActivity">
+
+    <include
+        android:id="@+id/layout_add_friend_title"
+        layout="@layout/view_layout_title" />
+
+    <RelativeLayout
+        android:id="@+id/layout_add_friend_avatar"
+        android:layout_width="470dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/im_add_friend_avatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/em_default_avatar" />
+
+        <TextView
+            android:id="@+id/tv_add_friend_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/im_add_friend_avatar"
+            android:textColor="@color/black2" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_add_friend_remarks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_add_friend_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="@string/userinfo_txt_note_mark"
+            android:textSize="22dp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/black3" />
+
+    <LinearLayout
+        android:id="@+id/layout_add_friend_area"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_add_friend_area"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/userinfo_txt_area"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/txt_add_friend_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_add_friend_sign"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_add_friend_sign"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/userinfo_txt_sign"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/txt_add_friend_sign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_add_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dip"
+        android:layout_marginRight="18dip"
+        android:layout_marginTop="30dp"
+        android:background="@color/green"
+        android:gravity="center"
+        android:paddingBottom="7dp"
+        android:paddingTop="7dp"
+        android:text="@string/userinfo_btn_add_contact"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_add_send_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dip"
+        android:layout_marginRight="18dip"
+        android:layout_marginTop="30dp"
+        android:background="@color/green"
+        android:gravity="center"
+        android:paddingBottom="7dp"
+        android:paddingTop="7dp"
+        android:text="@string/userinfo_btn_send_msg"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_add_send_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dip"
+        android:layout_marginRight="18dip"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingBottom="7dp"
+        android:paddingTop="7dp"
+        android:text="@string/userinfo_btn_send_video"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:visibility="gone" />
+
+</LinearLayout>
