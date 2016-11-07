@@ -3,8 +3,10 @@ package com.zhou.superwechat.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 
 import com.zhou.superwechat.R;
+import com.zhou.superwechat.ui.AddContactActivity;
 import com.zhou.superwechat.ui.GuideActivity;
 import com.zhou.superwechat.ui.LoginActivity;
 import com.zhou.superwechat.ui.RegisterActivity;
@@ -51,5 +53,9 @@ public class MFGT {
 
     public static void gotoUserProfile(Activity context) {
         startActivity(context, UserProfileActivity.class);
+    }
+
+    public static void gotoAddFirent(Activity context) {
+        startActivity(context, AddContactActivity.class);
     }
 }

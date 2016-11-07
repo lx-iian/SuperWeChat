@@ -43,7 +43,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <RelativeLayout
                     android:id="@+id/rl_switch_notification"
@@ -113,8 +114,9 @@
 
                 <RelativeLayout
                     android:id="@+id/rl_switch_vibrate"
-                    android:layout_width="match_parent"
+                    android:layout_width="665dp"
                     android:layout_height="50dip"
+                    android:layout_weight="0.50"
                     android:background="@drawable/em_btn_bottom_selector"
                     android:padding="10dip">
 
@@ -215,31 +217,6 @@
                         android:layout_centerVertical="true"
                         app:switchStatus="close" />
                 </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/btn_gray_normal" />
-
-
-                <LinearLayout
-                    android:id="@+id/ll_user_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dip"
-                    android:background="@drawable/em_btn_bottom_selector"
-                    android:padding="10dip">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:paddingLeft="10dip"
-                        android:text="@string/title_user_profile"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"

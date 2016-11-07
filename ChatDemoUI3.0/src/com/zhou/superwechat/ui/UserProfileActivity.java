@@ -248,10 +248,12 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
                     Result result = ResultUtils.getResultFromJson(s, User.class);
                     L.e(TAG, "result=" + result);
                     if (result != null && result.isRetMsg()) {
+                        User u = (User) result.getRetData();
+                        SuperWeChatHelper.getInstance().saveAppContact(u);
                         setPicToView(picData);
                     } else {
                         dialog.dismiss();
-                        CommonUtils.showMsgShortToast(result!=null?result.getRetCode():-1);
+                        CommonUtils.showMsgShortToast(result != null ? result.getRetCode() : -1);
 //                        CommonUtils.showLongToast(result!=null?getString(R.string.toast_updatephoto_fail));
                     }
                 } else {
@@ -294,7 +296,8 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
             Bitmap photo = extras.getParcelable("data");
             Drawable drawable = new BitmapDrawable(getResources(), photo);
             imUserInfoHeadAvatar.setImageDrawable(drawable);
-            uploadUserAvatar(Bitmap2Bytes(photo));
+            CommonUtils.showShortToast(R.string.toast_updatephoto_success);
+            // uploadUserAvatar(Bitmap2Bytes(photo));
         }
 
     }

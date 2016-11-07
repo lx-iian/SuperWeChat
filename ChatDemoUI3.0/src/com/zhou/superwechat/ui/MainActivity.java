@@ -31,6 +31,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,9 +56,12 @@ import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.adapter.MainTabAdpter;
 import com.zhou.superwechat.db.InviteMessgeDao;
 import com.zhou.superwechat.db.UserDao;
+import com.zhou.superwechat.dialog.TitleMenu.ActionItem;
+import com.zhou.superwechat.dialog.TitleMenu.TitlePopup;
 import com.zhou.superwechat.runtimepermissions.PermissionsManager;
 import com.zhou.superwechat.runtimepermissions.PermissionsResultAction;
 import com.zhou.superwechat.utils.L;
+import com.zhou.superwechat.utils.MFGT;
 import com.zhou.superwechat.widget.DMTabHost;
 import com.zhou.superwechat.widget.MFViewPager;
 
@@ -65,6 +69,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 @SuppressLint("NewApi")
 public class MainActivity extends BaseActivity implements
@@ -94,6 +99,7 @@ public class MainActivity extends BaseActivity implements
     // user account was removed
     private boolean isCurrentAccountRemoved = false;
     MainTabAdpter adapter;
+    TitlePopup mTitlePopup;
 
     /**
      * check if current user account was remove
@@ -221,7 +227,34 @@ public class MainActivity extends BaseActivity implements
         layoutMainTabHost.setChecked(0);
         layoutMainTabHost.setOnCheckedChangeListener(this);
         layoutMainViewPage.setOnPageChangeListener(this);
+        mTitlePopup = new TitlePopup(this, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mTitlePopup.addAction(new ActionItem(this, R.string.menu_groupchat, R.drawable.icon_menu_group));
+        mTitlePopup.addAction(new ActionItem(this, R.string.menu_addfriend, R.drawable.icon_menu_addfriend));
+        mTitlePopup.addAction(new ActionItem(this, R.string.menu_qrcode, R.drawable.icon_menu_sao));
+        mTitlePopup.addAction(new ActionItem(this, R.string.menu_money, R.drawable.icon_menu_money));
+        mTitlePopup.setItemOnClickListener(mOnItemOnClickListener);
     }
+
+    TitlePopup.OnItemOnClickListener mOnItemOnClickListener =
+            new TitlePopup.OnItemOnClickListener() {
+
+                @Override
+                public void onItemClick(ActionItem item, int position) {
+                    switch (position) {
+                        case 0:
+                            break;
+                        case 1:
+                            MFGT.gotoAddFirent(MainActivity.this);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+
+                    }
+                }
+            };
+
 
     EMMessageListener messageListener = new EMMessageListener() {
 
@@ -341,6 +374,11 @@ public class MainActivity extends BaseActivity implements
     public void onCheckedChange(int checkedPosition, boolean byUser) {
         layoutMainViewPage.setCurrentItem(checkedPosition, false);
         layoutMainTabHost.setChecked(checkedPosition);
+    }
+
+    @OnClick(R.id.iv_right)
+    public void showPop() {
+        mTitlePopup.show(findViewById(R.id.layout_main_title));
     }
 
     public class MyContactListener implements EMContactListener {
