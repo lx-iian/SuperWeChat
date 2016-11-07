@@ -2,14 +2,15 @@ package com.zhou.superwechat.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hyphenate.easeui.domain.User;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.zhou.superwechat.I;
 import com.zhou.superwechat.R;
+import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.utils.MFGT;
 
 import butterknife.ButterKnife;
@@ -29,17 +30,34 @@ public class FriendProfileActivity extends BaseActivity {
     @InjectView(R.id.tv_add_friend_remarks)
     TextView tvAddFriendRemarks;
     User user = null;
+    @InjectView(R.id.btn_add_contact)
+    Button btnAddContact;
+    @InjectView(R.id.btn_add_send_msg)
+    Button btnAddSendMsg;
+    @InjectView(R.id.btn_add_send_video)
+    Button btnAddSendVideo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_profile);
         ButterKnife.inject(this);
-         user = (User) getIntent().getSerializableExtra(I.User.USER_NAME);
+        user = (User) getIntent().getSerializableExtra(I.User.USER_NAME);
         if (user == null) {
             MFGT.finish(this);
         }
         initView();
+        isFriend();
+    }
+
+    private void isFriend() {
+        if (SuperWeChatHelper.getInstance().getAppContactList().containsKey(user.getMUserName())) {
+            btnAddSendMsg.setVisibility(View.VISIBLE);
+            btnAddSendVideo.setVisibility(View.VISIBLE);
+        } else {
+            btnAddContact.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initView() {
@@ -50,13 +68,29 @@ public class FriendProfileActivity extends BaseActivity {
     }
 
     private void setUserInfo() {
-        EaseUserUtils.setAppUserAvatar(this, user.getMUserName(),imAddFriendAvatar);
-        EaseUserUtils.setAppUserNick(user.getMUserName(),tvAddFriendRemarks);
-        EaseUserUtils.setAppUserNameWithNo(user.getMUserName(),tvAddFriendName);
+        EaseUserUtils.setAppUserAvatar(this, user.getMUserName(), imAddFriendAvatar);
+        EaseUserUtils.setAppUserNick(user.getMUserNick(), tvAddFriendRemarks);
+        EaseUserUtils.setAppUserNameWithNo(user.getMUserName(), tvAddFriendName);
     }
 
 
     @OnClick(R.id.iv_back)
     public void onClick() {
+        MFGT.finish(this);
+    }
+
+    @OnClick({R.id.iv_back, R.id.btn_add_contact, R.id.btn_add_send_msg, R.id.btn_add_send_video})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                break;
+            case R.id.btn_add_contact:
+                MFGT.gotoAddFriend(this, user.getMUserName());
+                break;
+            case R.id.btn_add_send_msg:
+                break;
+            case R.id.btn_add_send_video:
+                break;
+        }
     }
 }

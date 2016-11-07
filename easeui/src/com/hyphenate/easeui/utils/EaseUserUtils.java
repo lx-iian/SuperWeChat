@@ -2,6 +2,7 @@ package com.hyphenate.easeui.utils;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.domain.User;
 
 public class EaseUserUtils {
+    private static String TAG = EaseUserUtils.class.getSimpleName();
 
     static EaseUserProfileProvider userProvider;
 
@@ -99,6 +101,7 @@ public class EaseUserUtils {
         User user = getAppUserInfo(username);
         if (user != null && user.getAvatar() != null) {
             try {
+                Log.e(TAG, "setAppUserAvatar=" + user.getAvatar());
                 int avatarResId = Integer.parseInt(user.getAvatar());
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
@@ -138,6 +141,10 @@ public class EaseUserUtils {
 
     public static void setCurrentAppUserNameWithNo(TextView textView) {
         String username = EMClient.getInstance().getCurrentUser();
+        setAppUserName(String.valueOf(R.string.wechat_id), username, textView);
+    }
+
+    public static void setAppUserNameWithNo(String username, TextView textView) {
         setAppUserName(String.valueOf(R.string.wechat_id), username, textView);
     }
 

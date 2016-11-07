@@ -97,6 +97,24 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateVisible" />
+        <!-- 发送添加好友 -->
+        <activity
+            android:name=".ui.AddFriendActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateVisible" />
+        <!--欢迎页-->
+        <activity
+            android:name=".ui.GuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateVisible" />
+        <!--详细资料页-->
+        <activity
+            android:name=".ui.FriendProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateVisible" />
         <!-- 群组详情 -->
         <activity
             android:name=".ui.GroupDetailsActivity"
@@ -474,8 +492,6 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3ecea51f560650b1ed8a4b99808f52e8" />
 
-        <activity android:name=".ui.GuideActivity" />
-        <activity android:name=".ui.FriendProfileActivity"></activity>
     </application>
 
 </manifest>
