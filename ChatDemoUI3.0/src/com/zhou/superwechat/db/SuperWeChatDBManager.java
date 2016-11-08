@@ -5,14 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
+import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.domain.User;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.util.HanziToPinyin;
 import com.zhou.superwechat.Constant;
 import com.zhou.superwechat.SuperWeChatApplication;
 import com.zhou.superwechat.domain.InviteMessage;
 import com.zhou.superwechat.domain.RobotUser;
-import com.hyphenate.easeui.domain.EaseUser;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.util.HanziToPinyin;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,7 +65,8 @@ public class SuperWeChatDBManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Map<String, EaseUser> users = new Hashtable<String, EaseUser>();
         if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME /* + " desc" */, null);
+            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " desc " +
+                    InviteMessgeDao.COLUMN_NAME_TIME + " dec", null);
             while (cursor.moveToNext()) {
                 String username = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_ID));
                 String nick = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_NICK));

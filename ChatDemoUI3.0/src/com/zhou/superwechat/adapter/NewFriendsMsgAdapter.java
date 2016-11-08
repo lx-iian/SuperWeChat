@@ -24,6 +24,7 @@ import com.zhou.superwechat.data.NetDao;
 import com.zhou.superwechat.data.OkHttpUtils;
 import com.zhou.superwechat.db.InviteMessgeDao;
 import com.zhou.superwechat.domain.InviteMessage;
+import com.zhou.superwechat.utils.L;
 import com.zhou.superwechat.utils.ResultUtils;
 
 import android.app.Activity;
@@ -105,7 +106,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 						Result result = ResultUtils.getResultFromJson(s, User.class);
 						if (result != null && result.isRetMsg()) {
 							User u = (User) result.getRetData();
-							EaseUserUtils.setAppUserAvatar(context, u.getMUserName(), holder.avator);
+							EaseUserUtils.setAppUserAvatar(context, u.getAvatar(), holder.avator);
 							EaseUserUtils.setAppUserNick(u.getMUserNick(), holder.name);
 						}
 					}
@@ -190,7 +191,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	 * accept invitation
 	 * 
 	 * @param buttonAgree
-	 * @param username
+	 * @param buttonRefuse
 	 */
 	private void acceptInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
 		final ProgressDialog pd = new ProgressDialog(context);
@@ -248,7 +249,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
      * decline invitation
      * 
      * @param buttonAgree
-     * @param username
+     * @param buttonRefuse
      */
     private void refuseInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
         final ProgressDialog pd = new ProgressDialog(context);
@@ -280,12 +281,16 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
                         @Override
                         public void run() {
                             pd.dismiss();
-                            buttonRefuse.setText(str2);
-                            buttonRefuse.setBackgroundDrawable(null);
-                            buttonRefuse.setEnabled(false);
+							buttonAgree.setText(str2);
+							buttonAgree.setBackgroundDrawable(null);
+							buttonAgree.setEnabled(false);
+							buttonAgree.setVisibility(View.GONE);
 
-                            buttonAgree.setVisibility(View.INVISIBLE);
-                        }
+							buttonRefuse.setVisibility(View.INVISIBLE);
+							buttonRefuse.setText(str2);
+							buttonRefuse.setBackground(null);
+							L.e("acceptInvitation", "acceptInvitation..2....");
+						}
                     });
                 } catch (final Exception e) {
                     ((Activity) context).runOnUiThread(new Runnable() {
