@@ -1,5 +1,6 @@
 package com.zhou.superwechat.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import com.zhou.superwechat.utils.MFGT;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+
+import static com.zhou.superwechat.R.id.username;
 
 public class FriendProfileActivity extends BaseActivity {
 
@@ -83,6 +86,7 @@ public class FriendProfileActivity extends BaseActivity {
                 MFGT.gotoAddFriend(this, user.getMUserName());
                 break;
             case R.id.btn_add_send_msg:
+                MFGT.gotoChat(this, user.getMUserName());
                 break;
             case R.id.btn_add_send_video:
                 break;
