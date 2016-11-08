@@ -76,16 +76,16 @@ public class MainActivity extends BaseActivity implements
         DMTabHost.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
     protected static final String TAG = "MainActivity";
-    /*// textview for unread message count
-    private TextView unreadLabel;
-    private TextView unreadAddressLable;
-    // textview for unread event message
-
-    private Button[] mTabs;
+    //    // textview for unread message count
+//    private TextView unreadLabel;
+//    private TextView unreadAddressLable;
+//    // textview for unread event message
+//
+//    private Button[] mTabs;
     private ContactListFragment contactListFragment;
-    private Fragment[] fragments;
-    private int index;
-    private int currentTabIndex;*/
+    //    private Fragment[] fragments;
+//    private int index;
+    private int currentTabIndex;
     // user logged into another device
     public boolean isConflict = false;
     @InjectView(R.id.txt_left)
@@ -120,19 +120,19 @@ public class MainActivity extends BaseActivity implements
         ButterKnife.inject(this);
         // runtime permission for android 6.0, just require all permissions here for simple
         requestPermissions();
+        contactListFragment = new ContactListFragment();
         initView();
         umeng();
 
         inviteMessgeDao = new InviteMessgeDao(this);
         UserDao userDao = new UserDao(this);
-   /*     conversationListFragment = new ConversationListFragment();
-        contactListFragment = new ContactListFragment();
-        SettingsFragment settingFragment = new SettingsFragment();
-        fragments = new Fragment[]{conversationListFragment, contactListFragment, settingFragment};
-
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment)
-                .add(R.id.fragment_container, contactListFragment).hide(contactListFragment).show(conversationListFragment)
-                .commit();*/
+//        conversationListFragment = new ConversationListFragment();
+//        SettingsFragment settingFragment = new SettingsFragment();
+//        fragments = new Fragment[]{conversationListFragment, contactListFragment, settingFragment};
+//
+//        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment)
+//                .add(R.id.fragment_container, contactListFragment).hide(contactListFragment).show(conversationListFragment)
+//                .commit();
 
         //register broadcast receiver to receive the change of group from DemoHelper
         registerBroadcastReceiver();
@@ -220,7 +220,7 @@ public class MainActivity extends BaseActivity implements
         layoutMainViewPage.setOffscreenPageLimit(4);
 
         adapter.addFragment(new ConversationListFragment(), getString(R.string.app_name));
-        adapter.addFragment(new ContactListFragment(), getString(R.string.contacts));
+        adapter.addFragment(contactListFragment, getString(R.string.contacts));
         adapter.addFragment(new DiscoverFragment(), getString(R.string.discover));
         adapter.addFragment(new ProfileFragment(), getString(R.string.me));
         adapter.notifyDataSetChanged();
@@ -331,11 +331,12 @@ public class MainActivity extends BaseActivity implements
                     if (conversationListFragment != null) {
                         conversationListFragment.refresh();
                     }
-                } else if (currentTabIndex == 1) {
+                } else */
+                if (currentTabIndex == 1) {
                     if (contactListFragment != null) {
                         contactListFragment.refresh();
                     }
-                }*/
+                }
                 String action = intent.getAction();
                 if (action.equals(Constant.ACTION_GROUP_CHANAGED)) {
                     if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
@@ -361,6 +362,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onPageSelected(int position) {
+        currentTabIndex = position;
         layoutMainTabHost.setChecked(position);
         layoutMainViewPage.setCurrentItem(position);
     }
@@ -372,6 +374,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onCheckedChange(int checkedPosition, boolean byUser) {
+        currentTabIndex = checkedPosition;
         layoutMainViewPage.setCurrentItem(checkedPosition, false);
         layoutMainTabHost.setChecked(checkedPosition);
     }
@@ -455,11 +458,12 @@ public class MainActivity extends BaseActivity implements
         runOnUiThread(new Runnable() {
             public void run() {
                 int count = getUnreadAddressCountTotal();
-         /*       if (count > 0) {
-                    unreadAddressLable.setVisibility(View.VISIBLE);
+                L.e(TAG, "updateUnreadAddressLable, count=" + count);
+                if (count > 0) {
+                    layoutMainTabHost.setHasNew(1, true);
                 } else {
-                    unreadAddressLable.setVisibility(View.INVISIBLE);
-                }*/
+                    layoutMainTabHost.setHasNew(1, false);
+                }
             }
         });
 
