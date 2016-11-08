@@ -21,6 +21,7 @@ import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.R;
 import com.zhou.superwechat.db.InviteMessgeDao;
 import com.zhou.superwechat.db.UserDao;
+import com.zhou.superwechat.utils.MFGT;
 import com.zhou.superwechat.widget.ContactItemView;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.ui.EaseContactListFragment;
@@ -180,8 +181,8 @@ public class ContactListFragment extends EaseContactListFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.application_item:
-                    // 进入申请与通知页面
-                    startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
+                    // 进入新的朋友页面
+                    MFGT.gotoNewFriendsMsg(getActivity());
                     break;
                 case R.id.group_item:
                     // 进入群聊列表页面

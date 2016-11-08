@@ -16,9 +16,15 @@ package com.zhou.superwechat.adapter;
 import java.util.List;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.User;
+import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.zhou.superwechat.R;
+import com.zhou.superwechat.bean.Result;
+import com.zhou.superwechat.data.NetDao;
+import com.zhou.superwechat.data.OkHttpUtils;
 import com.zhou.superwechat.db.InviteMessgeDao;
 import com.zhou.superwechat.domain.InviteMessage;
+import com.zhou.superwechat.utils.ResultUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -92,6 +98,24 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 			
 			holder.reason.setText(msg.getReason());
 			holder.name.setText(msg.getFrom());
+			NetDao.searchUser(context, msg.getFrom(), new OkHttpUtils.OnCompleteListener<String>() {
+				@Override
+				public void onSuccess(String s) {
+					if (s != null) {
+						Result result = ResultUtils.getResultFromJson(s, User.class);
+						if (result != null && result.isRetMsg()) {
+							User u = (User) result.getRetData();
+							EaseUserUtils.setAppUserAvatar(context, u.getMUserName(), holder.avator);
+							EaseUserUtils.setAppUserNick(u.getMUserNick(), holder.name);
+						}
+					}
+				}
+
+				@Override
+				public void onError(String error) {
+
+				}
+			});
 			// holder.time.setText(DateUtils.getTimestampString(new
 			// Date(msg.getTime())));
 			if (msg.getStatus() == InviteMessage.InviteMesageStatus.BEAGREED) {
@@ -165,7 +189,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	/**
 	 * accept invitation
 	 * 
-	 * @param button
+	 * @param buttonAgree
 	 * @param username
 	 */
 	private void acceptInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
@@ -223,7 +247,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	/**
      * decline invitation
      * 
-     * @param button
+     * @param buttonAgree
      * @param username
      */
     private void refuseInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
