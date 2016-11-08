@@ -73,16 +73,11 @@ public class FriendProfileActivity extends BaseActivity {
         EaseUserUtils.setAppUserNameWithNo(user.getMUserName(), tvAddFriendName);
     }
 
-
-    @OnClick(R.id.iv_back)
-    public void onClick() {
-        MFGT.finish(this);
-    }
-
     @OnClick({R.id.iv_back, R.id.btn_add_contact, R.id.btn_add_send_msg, R.id.btn_add_send_video})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                MFGT.finish(this);
                 break;
             case R.id.btn_add_contact:
                 MFGT.gotoAddFriend(this, user.getMUserName());
