@@ -17,12 +17,17 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.User;
 import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.R;
+import com.zhou.superwechat.bean.Result;
+import com.zhou.superwechat.data.NetDao;
+import com.zhou.superwechat.data.OkHttpUtils;
 import com.zhou.superwechat.db.InviteMessgeDao;
 import com.zhou.superwechat.db.UserDao;
 import com.zhou.superwechat.utils.L;
 import com.zhou.superwechat.utils.MFGT;
+import com.zhou.superwechat.utils.ResultUtils;
 import com.zhou.superwechat.widget.ContactItemView;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.ui.EaseContactListFragment;
@@ -36,6 +41,7 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -250,6 +256,25 @@ public class ContactListFragment extends EaseContactListFragment {
         pd.setMessage(st1);
         pd.setCanceledOnTouchOutside(false);
         pd.show();
+
+        NetDao.delContact(getActivity(), EMClient.getInstance().getCurrentUser(),
+                tobeDeleteUser.getUsername(), new OkHttpUtils.OnCompleteListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        if (s != null) {
+                            Result result = ResultUtils.getResultFromJson(s, User.class);
+                            if (result != null && result.isRetMsg()) {
+                                SuperWeChatHelper.getInstance().delAppContact(tobeDeleteUser.getUsername());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+
         new Thread(new Runnable() {
             public void run() {
                 try {

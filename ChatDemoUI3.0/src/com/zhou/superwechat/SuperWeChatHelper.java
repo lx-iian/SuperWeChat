@@ -105,7 +105,6 @@ public class SuperWeChatHelper {
     private Map<String, User> appContactList;
 
 
-
     /**
      * sync groups status listener
      */
@@ -653,12 +652,13 @@ public class SuperWeChatHelper {
         }
 
         @Override
-        public void onContactDeleted(String username) {
+        public void onContactDeleted(final String username) {
             L.e(TAG, "MyContactListener, onContactDeleted...");
             Map<String, EaseUser> localUsers = SuperWeChatHelper.getInstance().getContactList();
             localUsers.remove(username);
             userDao.deleteContact(username);
             inviteMessgeDao.deleteMessage(username);
+            SuperWeChatHelper.getInstance().delAppContact(username);
 
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_CONTACT_CHANAGED));
         }
@@ -1316,6 +1316,7 @@ public class SuperWeChatHelper {
     /**
      * update contact list
      * local server
+     *
      * @param aContactList
      */
     public void setAppContactList(Map<String, User> aContactList) {
@@ -1339,12 +1340,22 @@ public class SuperWeChatHelper {
     }
 
     /**
+     * delete single contact
+     * local server
+     */
+    public void delAppContact(String username) {
+        getAppContactList().remove(username);
+        demoModel.delAppContact(username);
+    }
+
+    /**
      * get contact list
      * local server
+     *
      * @return
      */
     public Map<String, User> getAppContactList() {
-        if (isLoggedIn() && (appContactList == null || appContactList.size() ==0)) {
+        if (isLoggedIn() && (appContactList == null || appContactList.size() == 0)) {
             appContactList = demoModel.getAppContactList();
         }
 

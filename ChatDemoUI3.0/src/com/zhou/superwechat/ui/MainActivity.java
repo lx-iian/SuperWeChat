@@ -101,6 +101,15 @@ public class MainActivity extends BaseActivity implements
     MainTabAdpter adapter;
     TitlePopup mTitlePopup;
 
+    private AlertDialog.Builder conflictBuilder;
+    private AlertDialog.Builder accountRemovedBuilder;
+    private boolean isConflictDialogShow;
+    private boolean isAccountRemovedDialogShow;
+    private BroadcastReceiver internalDebugReceiver;
+    private ConversationListFragment conversationListFragment;
+    private BroadcastReceiver broadcastReceiver;
+    private LocalBroadcastManager broadcastManager;
+
     /**
      * check if current user account was remove
      */
@@ -121,6 +130,7 @@ public class MainActivity extends BaseActivity implements
         // runtime permission for android 6.0, just require all permissions here for simple
         requestPermissions();
         contactListFragment = new ContactListFragment();
+        conversationListFragment = new ConversationListFragment();
         initView();
         umeng();
 
@@ -219,7 +229,7 @@ public class MainActivity extends BaseActivity implements
         layoutMainViewPage.setAdapter(adapter);
         layoutMainViewPage.setOffscreenPageLimit(4);
 
-        adapter.addFragment(new ConversationListFragment(), getString(R.string.app_name));
+        adapter.addFragment(conversationListFragment, getString(R.string.app_name));
         adapter.addFragment(contactListFragment, getString(R.string.contacts));
         adapter.addFragment(new DiscoverFragment(), getString(R.string.discover));
         adapter.addFragment(new ProfileFragment(), getString(R.string.me));
@@ -298,13 +308,13 @@ public class MainActivity extends BaseActivity implements
         runOnUiThread(new Runnable() {
             public void run() {
                 // refresh unread count
-            /*    updateUnreadLabel();
+                updateUnreadLabel();
                 if (currentTabIndex == 0) {
                     // refresh conversation list
                     if (conversationListFragment != null) {
                         conversationListFragment.refresh();
                     }
-                }*/
+                }
             }
         });
     }
@@ -326,12 +336,12 @@ public class MainActivity extends BaseActivity implements
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
                 updateUnreadAddressLable();
-            /*    if (currentTabIndex == 0) {
+                if (currentTabIndex == 0) {
                     // refresh conversation list
                     if (conversationListFragment != null) {
                         conversationListFragment.refresh();
                     }
-                } else */
+                } else
                 if (currentTabIndex == 1) {
                     if (contactListFragment != null) {
                         contactListFragment.refresh();
@@ -539,15 +549,6 @@ public class MainActivity extends BaseActivity implements
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    private AlertDialog.Builder conflictBuilder;
-    private AlertDialog.Builder accountRemovedBuilder;
-    private boolean isConflictDialogShow;
-    private boolean isAccountRemovedDialogShow;
-    private BroadcastReceiver internalDebugReceiver;
-    private ConversationListFragment conversationListFragment;
-    private BroadcastReceiver broadcastReceiver;
-    private LocalBroadcastManager broadcastManager;
 
     /**
      * show the dialog when user logged into another device
