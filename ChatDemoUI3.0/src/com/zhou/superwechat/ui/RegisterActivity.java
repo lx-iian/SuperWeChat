@@ -89,11 +89,11 @@ public class RegisterActivity extends BaseActivity {
             CommonUtils.showShortToast(R.string.User_name_cannot_be_empty);
             etUsername.requestFocus();
             return;
-        } else if (!username.matches("[a-zA-Z]\\w{5,15}")) {
+        }/* else if (!username.matches("[a-zA-Z]\\w{5,15}")) {
             CommonUtils.showShortToast(R.string.illegal_user_name);
             etUsername.requestFocus();
             return;
-        } else if (TextUtils.isEmpty(nick)) {
+        } */else if (TextUtils.isEmpty(nick)) {
             CommonUtils.showShortToast(R.string.nick_name_connot_be_empty);
             etNick.requestFocus();
             return;
