@@ -21,6 +21,7 @@ import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.R;
 import com.zhou.superwechat.db.InviteMessgeDao;
 import com.zhou.superwechat.db.UserDao;
+import com.zhou.superwechat.utils.L;
 import com.zhou.superwechat.utils.MFGT;
 import com.zhou.superwechat.widget.ContactItemView;
 import com.hyphenate.easeui.domain.EaseUser;
@@ -216,6 +217,7 @@ public class ContactListFragment extends EaseContactListFragment {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        L.e(TAG, "onContextItemSelected..." + item.getItemId());
         if (item.getItemId() == R.id.delete_contact) {
             try {
                 // delete contact

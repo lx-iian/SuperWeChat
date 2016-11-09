@@ -24,9 +24,12 @@ import com.hyphenate.easeui.model.EaseAtMessageHelper;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.easeui.widget.EaseConversationList.EaseConversationListHelper;
 import com.hyphenate.util.NetUtils;
+import com.zhou.superwechat.utils.L;
+
+import static com.zhou.superwechat.ui.GroupsActivity.TAG;
 
 public class ConversationListFragment extends EaseConversationListFragment{
-
+    private static String TAG = ConversationListFragment.class.getSimpleName();
     private TextView errorText;
 
     @Override
@@ -112,11 +115,14 @@ public class ConversationListFragment extends EaseConversationListFragment{
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        L.e(TAG, "onContextItemSelected..." + item.getItemId());
         boolean deleteMessage = false;
         if (item.getItemId() == R.id.delete_message) {
             deleteMessage = true;
         } else if (item.getItemId() == R.id.delete_conversation) {
             deleteMessage = false;
+        } else {
+            return false;
         }
     	EMConversation tobeDeleteCons = conversationListView.getItem(((AdapterContextMenuInfo) item.getMenuInfo()).position);
     	if (tobeDeleteCons == null) {
@@ -139,5 +145,4 @@ public class ConversationListFragment extends EaseConversationListFragment{
         ((MainActivity) getActivity()).updateUnreadLabel();
         return true;
     }
-
 }
