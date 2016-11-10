@@ -3,6 +3,7 @@ package com.zhou.superwechat.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hyphenate.easeui.domain.User;
@@ -12,9 +13,12 @@ import com.zhou.superwechat.ui.AddContactActivity;
 import com.zhou.superwechat.ui.AddFriendActivity;
 import com.zhou.superwechat.ui.ChatActivity;
 import com.zhou.superwechat.ui.FriendProfileActivity;
+import com.zhou.superwechat.ui.GroupsActivity;
 import com.zhou.superwechat.ui.GuideActivity;
 import com.zhou.superwechat.ui.LoginActivity;
 import com.zhou.superwechat.ui.NewFriendsMsgActivity;
+import com.zhou.superwechat.ui.NewGroupActivity;
+import com.zhou.superwechat.ui.PublicGroupsActivity;
 import com.zhou.superwechat.ui.RegisterActivity;
 import com.zhou.superwechat.ui.SettingsActivity;
 import com.zhou.superwechat.ui.UserProfileActivity;
@@ -91,4 +95,15 @@ public class MFGT {
     }
 
 
+    public static void gotoGroup(Activity context) {
+        startActivity(context, GroupsActivity.class);
+    }
+
+    public static void gotoCreateNewGroup(Activity context) {
+        startActivity(context, NewGroupActivity.class);
+    }
+
+    public static void gotoPublicGroup(Activity context) {
+        startActivity(context, PublicGroupsActivity.class);
+    }
 }
