@@ -114,7 +114,7 @@ public class ContactListFragment extends EaseContactListFragment {
         // 自己的方法（未测试）
         // titleBar.setBackgroundResource(R.color.colorPrimary);
         titleBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        titleBar.setVisibility(View.GONE);
+        hideTitleBar();
         //设置联系人数据
         Map<String, User> m = SuperWeChatHelper.getInstance().getAppContactList();
         if (m instanceof Hashtable<?, ?>) {
