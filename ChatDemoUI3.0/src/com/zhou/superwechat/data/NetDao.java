@@ -5,7 +5,9 @@ import android.content.Context;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroup;
 import com.zhou.superwechat.I;
+import com.zhou.superwechat.SuperWeChatHelper;
 import com.zhou.superwechat.bean.Result;
+import com.zhou.superwechat.utils.L;
 import com.zhou.superwechat.utils.MD5;
 
 import java.io.File;
@@ -127,5 +129,22 @@ public class NetDao {
                 .addFile2(file)
                 .post()
                 .execute(listener);
+    }
+
+    public static void addGtoupMembers(Context context, EMGroup emGroup, OkHttpUtils.OnCompleteListener<String> listener) {
+        String memberArr = "";
+        for (String m : emGroup.getMembers()) {
+            if (!m.equals(SuperWeChatHelper.getInstance().getCurrentUsernName())) {
+                memberArr += m + ",";
+            }
+            memberArr = memberArr.substring(0, memberArr.length() - 1);
+            L.e("addGtoupMembers", "memberArr" + memberArr);
+            OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+            utils.setRequestUrl(I.REQUEST_ADD_GROUP_MEMBERS)
+                    .addParam(I.Member.GROUP_HX_ID,emGroup.getGroupId())
+                    .addParam(I.Member.USER_NAME,memberArr)
+                    .targetClass(String.class)
+                    .execute(listener);
+        }
     }
 }
