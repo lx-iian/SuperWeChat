@@ -171,10 +171,9 @@ public class PublicGroupsActivity extends BaseActivity {
 		private LayoutInflater inflater;
         Context mContext;
 
-        public GroupsAdapter(Context context, int res, List<EMGroupInfo> groups) {
+		public GroupsAdapter(Context context, int res, List<EMGroupInfo> groups) {
 			super(context, res, groups);
-            mContext = context;
-            this.inflater = LayoutInflater.from(context);
+			this.inflater = LayoutInflater.from(context);
 		}
 
 		@Override
@@ -185,8 +184,8 @@ public class PublicGroupsActivity extends BaseActivity {
 
 			((TextView) convertView.findViewById(R.id.name)).setText(getItem(position).getGroupName());
 
-            EaseUserUtils.setAppGroupAvatar(mContext, getItem(position).getGroupId()
-                    , ((ImageView) convertView.findViewById(R.id.avatar)));
+            EaseUserUtils.setAppGroupAvatar(mContext, getItem(position).getGroupId(),
+                    ((ImageView) convertView.findViewById(R.id.avatar)));
 			return convertView;
 		}
 	}
