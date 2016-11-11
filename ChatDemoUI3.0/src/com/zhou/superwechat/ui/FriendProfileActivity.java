@@ -14,7 +14,11 @@ import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.zhou.superwechat.I;
 import com.zhou.superwechat.R;
 import com.zhou.superwechat.SuperWeChatHelper;
+import com.zhou.superwechat.bean.Result;
+import com.zhou.superwechat.data.NetDao;
+import com.zhou.superwechat.data.OkHttpUtils;
 import com.zhou.superwechat.utils.MFGT;
+import com.zhou.superwechat.utils.ResultUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -34,6 +38,7 @@ public class FriendProfileActivity extends BaseActivity {
     TextView tvAddFriendName;
     @InjectView(R.id.tv_add_friend_remarks)
     TextView tvAddFriendRemarks;
+    String username = null;
     User user = null;
     @InjectView(R.id.btn_add_contact)
     Button btnAddContact;
@@ -41,24 +46,69 @@ public class FriendProfileActivity extends BaseActivity {
     Button btnAddSendMsg;
     @InjectView(R.id.btn_add_send_video)
     Button btnAddSendVideo;
-
+    boolean isFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_profile);
         ButterKnife.inject(this);
-        user = (User) getIntent().getSerializableExtra(I.User.USER_NAME);
-        if (user == null) {
+        username = getIntent().getStringExtra(I.User.USER_NAME);
+        if (username == null) {
             MFGT.finish(this);
             return;
         }
         initView();
-        isFriend();
+        user = SuperWeChatHelper.getInstance().getAppContactList().get(username);
+        if (user == null) {
+            isFriend = false;
+        } else {
+            setUserInfo();
+            isFriend = true;
+        }
+        isFriend(isFriend);
+        syncUserInfo();
     }
 
-    private void isFriend() {
-        if (SuperWeChatHelper.getInstance().getAppContactList().containsKey(user.getMUserName())) {
+
+    private void syncFail() {
+        MFGT.finish(this);
+        return;
+    }
+
+    private void syncUserInfo() {
+        NetDao.syncUserInfo(this, username, new OkHttpUtils.OnCompleteListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                if (s != null) {
+                    Result result = ResultUtils.getResultFromJson(s, User.class);
+                    if (result != null && result.isRetMsg()) {
+                        user = (User) result.getRetData();
+                        if (user != null) {
+                            setUserInfo();
+                            if (isFriend) {
+                                SuperWeChatHelper.getInstance().saveAppContact(user);
+                            }
+                        } else {
+                            syncFail();
+                        }
+                    } else {
+                        syncFail();
+                    }
+                } else {
+                    syncFail();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                syncFail();
+            }
+        });
+    }
+
+    private void isFriend(boolean isFriend) {
+        if (isFriend) {
             btnAddSendMsg.setVisibility(View.VISIBLE);
             btnAddSendVideo.setVisibility(View.VISIBLE);
         } else {

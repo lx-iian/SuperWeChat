@@ -120,6 +120,8 @@ public class AddContactActivity extends BaseActivity {
                     if (result != null && result.isRetMsg()) {
                         User user = (User) result.getRetData();
                         if (user != null) {
+                            // 应该改为这个
+                            // MFGT.gotoFriendProfile(AddContactActivity.this, user.getMUserName());
                             MFGT.gotoFriendProfile(AddContactActivity.this, user);
                         }
                     } else {
